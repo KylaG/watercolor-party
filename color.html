@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Watercolor Party Inspiration</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: #ffffff;
+            min-height: 100vh;
+            overflow-x: hidden;
+            color: #333;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(255, 182, 193, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(173, 216, 230, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 60%, rgba(221, 160, 221, 0.25) 0%, transparent 50%),
+                radial-gradient(circle at 90% 70%, rgba(152, 251, 152, 0.2) 0%, transparent 50%),
+                radial-gradient(circle at 30% 80%, rgba(255, 218, 185, 0.25) 0%, transparent 50%);
+            z-index: -1;
+            animation: watercolorShift 20s ease-in-out infinite;
+        }
+
+        @keyframes watercolorShift {
+            0%, 100% {
+                transform: scale(1) rotate(0deg);
+                filter: blur(40px);
+            }
+            33% {
+                transform: scale(1.1) rotate(120deg);
+                filter: blur(45px);
+            }
+            66% {
+                transform: scale(0.95) rotate(240deg);
+                filter: blur(35px);
+            }
+        }
+
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #1a1a1a;
+            font-size: 2.8em;
+            font-weight: 300;
+            margin-bottom: 10px;
+            letter-spacing: -1px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 40px;
+            font-size: 1.1em;
+            font-weight: 300;
+        }
+
+        /* Tab Navigation */
+        .tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 40px;
+            gap: 15px;
+        }
+
+        .tab-button {
+            padding: 14px 32px;
+            background: #f5f5f5;
+            border: none;
+            border-radius: 30px;
+            font-size: 1em;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: #666;
+            letter-spacing: 0.5px;
+        }
+
+        .tab-button:hover {
+            background: #e8e8e8;
+        }
+
+        .tab-button.active {
+            background: #333;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Spinning Wheel Styles */
+        .wheel-container {
+            position: relative;
+            width: 320px;
+            height: 320px;
+            margin: 0 auto 50px;
+        }
+
+        .wheel {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+            transition: transform 4s cubic-bezier(0.25, 0.1, 0.25, 1);
+            cursor: grab;
+            touch-action: none;
+            user-select: none;
+        }
+
+        .wheel:active {
+            cursor: grabbing;
+        }
+
+        .wheel-segment {
+            position: absolute;
+            width: 50%;
+            height: 50%;
+            transform-origin: right bottom;
+            clip-path: polygon(0 0, 100% 0, 100% 100%);
+        }
+
+        .wheel-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80px;
+            height: 80px;
+            background: #333;
+            color: white;
+            border-radius: 50%;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 1.1em;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .wheel-center:hover {
+            transform: translate(-50%, -50%) scale(1.05);
+        }
+
+        .wheel-center:active {
+            transform: translate(-50%, -50%) scale(0.95);
+        }
+
+        .pointer {
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 20px solid transparent;
+            border-right: 20px solid transparent;
+            border-top: 40px solid #ff4444;
+            z-index: 11;
+            filter: drop-shadow(0 5px 10px rgba(0,0,0,0.2));
+        }
+
+        .spin-button {
+            display: block;
+            margin: 20px auto;
+            padding: 16px 48px;
+            background: #333;
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-size: 1.1em;
+            font-weight: 500;
+            cursor: pointer;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            transition: all 0.2s ease;
+            letter-spacing: 0.5px;
+        }
+
+        .spin-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .spin-button:active {
+            transform: scale(0.98);
+        }
+
+        .prompt-display {
+            background: rgba(248, 248, 248, 0.85);
+            backdrop-filter: blur(10px);
+            padding: 35px;
+            border-radius: 20px;
+            text-align: center;
+            margin: 20px auto;
+            max-width: 600px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            min-height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(238, 238, 238, 0.8);
+        }
+
+        .prompt-text {
+            font-size: 1.5em;
+            color: #333;
+            line-height: 1.6;
+            font-weight: 300;
+        }
+
+        /* Gallery Styles */
+        .gallery-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .gallery-title {
+            text-align: center;
+            font-size: 2.2em;
+            font-weight: 300;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .gallery-subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1.1em;
+        }
+
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        .grid-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            background: #f5f5f5;
+            aspect-ratio: 1;
+        }
+
+        .grid-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        .grid-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* Lightbox Styles */
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.95);
+            overflow: auto;
+        }
+
+        .lightbox-content {
+            display: block;
+            margin: auto;
+            max-width: 90%;
+            max-height: 90vh;
+            margin-top: 5vh;
+            border-radius: 8px;
+            box-shadow: 0 5px 30px rgba(0,0,0,0.5);
+        }
+
+        .close-lightbox {
+            position: absolute;
+            top: 20px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: 300;
+            cursor: pointer;
+            transition: color 0.3s;
+            z-index: 1001;
+        }
+
+        .close-lightbox:hover {
+            color: #bbb;
+        }
+
+        .lightbox-nav {
+            position: fixed;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
+            transform: translateY(-50%);
+        }
+
+        .nav-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: white;
+            font-size: 30px;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+
+        .nav-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Mobile Gallery Optimizations */
+        @media (max-width: 768px) {
+            .image-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+                gap: 15px;
+                padding: 15px;
+            }
+
+            .gallery-title {
+                font-size: 1.8em;
+            }
+
+            .lightbox-content {
+                max-width: 95%;
+                max-height: 80vh;
+                margin-top: 10vh;
+            }
+
+            .nav-btn {
+                font-size: 24px;
+                padding: 8px 15px;
+            }
+        }
+
+        /* Remove button for images */
+        .remove-image {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            font-size: 18px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            display: none;
+            z-index: 5;
+        }
+
+        .slide:hover .remove-image {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Watercolor Inspiration</h1>
+        <p class="subtitle">Let creativity flow like water</p>
+
+        <div class="tabs">
+            <button class="tab-button active" onclick="switchTab('wheel')">Prompt Wheel</button>
+            <button class="tab-button" onclick="switchTab('gallery')">Inspiration Gallery</button>
+        </div>
+
+        <!-- Spinning Wheel Tab -->
+        <div id="wheel-tab" class="tab-content active">
+            <div class="wheel-container">
+                <div class="pointer"></div>
+                <div class="wheel" id="wheel">
+                    <!-- Wheel segments will be generated by JavaScript -->
+                </div>
+                <div class="wheel-center" onclick="spinWheel()">SPIN</div>
+            </div>
+
+            <button class="spin-button" onclick="spinWheel()">Spin for Inspiration!</button>
+
+            <div class="prompt-display">
+                <p class="prompt-text" id="prompt-text">Give the wheel a spin to discover your watercolor journey...</p>
+            </div>
+        </div>
+
+        <!-- Gallery Tab -->
+        <div id="gallery-tab" class="tab-content">
+            <div class="gallery-container">
+                <h2 class="gallery-title">Watercolor Inspiration Board</h2>
+                <p class="gallery-subtitle">Click any image for a closer look</p>
+                
+                <div class="image-grid">
+                    <!-- Images will be dynamically loaded here -->
+                </div>
+            </div>
+
+            <!-- Lightbox for full-screen viewing -->
+            <div id="lightbox" class="lightbox">
+                <span class="close-lightbox" onclick="closeLightbox()">&times;</span>
+                <img class="lightbox-content" id="lightbox-img">
+                <div class="lightbox-nav">
+                    <button class="nav-btn prev" onclick="navigateLightbox(-1)">&#10094;</button>
+                    <button class="nav-btn next" onclick="navigateLightbox(1)">&#10095;</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Stanford-specific watercolor prompts
+        const prompts = [
+            "Paint your favorite Stanford memory",
+            "Capture the vibe of a sunny day",
+            "Paint what home feels like to you",
+            "Paint something for your pops--it's almost father's day",
+            "Paint your dad's favorite color",
+            "Paint something that reminds you of childhood",
+            "Capture the essence of your favorite song",
+            "Paint what you remember from your favorite memory of us together :)",
+            "Paint something that made you happy this morning",
+            "Show the color of your favorite Stanford memory",
+            "Paint something in your mom's favorite color",
+            "Show the emotion of graduation",
+            "Paint what this summer feels like to you",
+            "Paint something you are manifesting for yourself!",
+            "Capture the spirit of your favorite flower!",
+            "Show us your favorite sea creature",
+            "Paint something to gift to someone you love",
+            "Decorate the initials of you and your bestie",
+            "Capture the color of your most vivid dreams",
+            "Paint your optimal garden",
+            "Paint what Half Moon Bay looks like to you",
+            "Paint your favorite spot on campus",
+            "Show us your best Hoover Tower",
+            "Paint the person sitting next to you!",
+            "Paint the person to the right of you!",
+            "Paint the person to the left of you!",
+            "Paint your favorite fruit"
+        ];
+
+        // Modern color palette - expanded for better variety
+        const colors = [
+            '#FF6B6B', '#4ECDC4', '#FFD93D', '#54A0FF', 
+            '#FF9FF3', '#6BCF7F', '#FA8072', '#45B7D1',
+            '#FECA57', '#E84545', '#96CEB4', '#4D96FF',
+            '#FF6B9D', '#43DDE6', '#FFC764', '#903749',
+            '#48DBFB', '#FC5185', '#364F6B', '#C44569',
+            '#A8E6CF', '#FFD3B6', '#FFAAA5', '#B39BC8',
+            '#F172A1', '#E64398', '#A8DADC', '#457B9D'
+        ];
+
+        // Generate colors ensuring no adjacent colors are the same
+        function generateWheelColors(count) {
+            const wheelColors = [];
+            let lastColor = null;
+            
+            for (let i = 0; i < count; i++) {
+                let newColor;
+                // Keep picking random colors until we get one different from the last
+                do {
+                    newColor = colors[Math.floor(Math.random() * colors.length)];
+                } while (newColor === lastColor);
+                
+                wheelColors.push(newColor);
+                lastColor = newColor;
+            }
+            
+            // Also make sure first and last colors are different (since wheel wraps around)
+            if (wheelColors[0] === wheelColors[wheelColors.length - 1]) {
+                // Find a different color for the last position
+                let differentColor;
+                do {
+                    differentColor = colors[Math.floor(Math.random() * colors.length)];
+                } while (differentColor === wheelColors[0] || differentColor === wheelColors[wheelColors.length - 2]);
+                wheelColors[wheelColors.length - 1] = differentColor;
+            }
+            
+            return wheelColors;
+        }
+
+        let currentSlide = 0;
+        let autoplayInterval = null;
+        let isSpinning = false;
+        let currentRotation = 0;
+        let isDragging = false;
+        let startAngle = 0;
+        let lastAngle = 0;
+        let velocity = 0;
+        let animationId = null;
+        let currentLightboxIndex = 0;
+
+        // Your watercolor inspiration images - hosted on GitHub
+        const galleryImages = [
+            // Add your GitHub-hosted images here
+            // Example format: 'https://raw.githubusercontent.com/YOUR-USERNAME/watercolor-party/main/images/image1.jpg'
+            // Replace YOUR-USERNAME with your actual GitHub username
+        ];
+
+        // Initialize wheel
+        function initializeWheel() {
+            const wheel = document.getElementById('wheel');
+            const segmentAngle = 360 / prompts.length;
+            const wheelColors = generateWheelColors(prompts.length);
+
+            prompts.forEach((prompt, index) => {
+                const segment = document.createElement('div');
+                segment.className = 'wheel-segment';
+                segment.style.background = wheelColors[index];
+                segment.style.transform = `rotate(${index * segmentAngle}deg)`;
+                wheel.appendChild(segment);
+            });
+            
+            // Add touch and mouse event listeners for manual spinning
+            wheel.addEventListener('mousedown', startDrag);
+            wheel.addEventListener('touchstart', startDrag);
+            document.addEventListener('mousemove', drag);
+            document.addEventListener('touchmove', drag);
+            document.addEventListener('mouseup', endDrag);
+            document.addEventListener('touchend', endDrag);
+        }
+
+        // Get angle from center of wheel
+        function getAngle(e) {
+            const wheel = document.getElementById('wheel');
+            const rect = wheel.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+            
+            let clientX, clientY;
+            if (e.touches) {
+                clientX = e.touches[0].clientX;
+                clientY = e.touches[0].clientY;
+            } else {
+                clientX = e.clientX;
+                clientY = e.clientY;
+            }
+            
+            const angle = Math.atan2(clientY - centerY, clientX - centerX) * 180 / Math.PI;
+            return angle;
+        }
+
+        // Start dragging the wheel
+        function startDrag(e) {
+            if (isSpinning) return;
+            e.preventDefault();
+            isDragging = true;
+            startAngle = getAngle(e);
+            lastAngle = startAngle;
+            velocity = 0;
+            
+            // Cancel any ongoing momentum animation
+            if (animationId) {
+                cancelAnimationFrame(animationId);
+                animationId = null;
+            }
+        }
+
+        // Drag the wheel
+        function drag(e) {
+            if (!isDragging) return;
+            e.preventDefault();
+            
+            const currentAngle = getAngle(e);
+            let deltaAngle = currentAngle - lastAngle;
+            
+            // Handle angle wrap-around
+            if (deltaAngle > 180) deltaAngle -= 360;
+            if (deltaAngle < -180) deltaAngle += 360;
+            
+            // Update rotation
+            currentRotation += deltaAngle;
+            const wheel = document.getElementById('wheel');
+            wheel.style.transform = `rotate(${currentRotation}deg)`;
+            wheel.style.transition = 'none';
+            
+            // Calculate velocity for momentum
+            velocity = deltaAngle;
+            lastAngle = currentAngle;
+        }
+
+        // End dragging and apply momentum
+        function endDrag(e) {
+            if (!isDragging) return;
+            isDragging = false;
+            
+            // Calculate spin based on velocity
+            const spinPower = Math.abs(velocity);
+            
+            // Only spin if there's enough velocity (threshold)
+            if (spinPower > 2) {
+                // Convert velocity to number of spins
+                const minSpins = 2;
+                const maxSpins = 6;
+                const spins = minSpins + (spinPower / 50) * (maxSpins - minSpins);
+                
+                // Add randomness to final position
+                const finalAngle = Math.random() * 360;
+                
+                // Calculate total rotation in the direction of the swipe
+                const direction = velocity > 0 ? 1 : -1;
+                const totalRotation = currentRotation + (direction * spins * 360) + finalAngle;
+                
+                // Apply the spin animation
+                performSpin(totalRotation);
+            } else {
+                // If no significant velocity, just show current prompt
+                showCurrentPrompt();
+            }
+        }
+
+        // Perform the actual spinning animation
+        function performSpin(targetRotation) {
+            isSpinning = true;
+            const wheel = document.getElementById('wheel');
+            const promptText = document.getElementById('prompt-text');
+            
+            // Apply smooth spinning animation
+            wheel.style.transition = 'transform 3s cubic-bezier(0.25, 0.1, 0.25, 1)';
+            wheel.style.transform = `rotate(${targetRotation}deg)`;
+            currentRotation = targetRotation;
+            
+            // Calculate which prompt we landed on
+            const segmentAngle = 360 / prompts.length;
+            const normalizedAngle = ((360 - (targetRotation % 360)) % 360 + 360) % 360;
+            const selectedIndex = Math.floor(normalizedAngle / segmentAngle);
+            
+            // Show the prompt after spinning
+            setTimeout(() => {
+                promptText.textContent = prompts[selectedIndex];
+                promptText.style.animation = 'fadeIn 0.5s';
+                isSpinning = false;
+                wheel.style.transition = 'none';
+            }, 3000);
+        }
+
+        // Apply momentum after releasing (removed - no longer needed)
+        function applyMomentum() {
+            // This function is no longer used
+        }
+
+        // Show the prompt based on current rotation
+        function showCurrentPrompt() {
+            const segmentAngle = 360 / prompts.length;
+            // Normalize rotation to 0-360 range
+            let normalizedRotation = ((360 - (currentRotation % 360)) % 360 + 360) % 360;
+            const selectedIndex = Math.floor(normalizedRotation / segmentAngle);
+            
+            const promptText = document.getElementById('prompt-text');
+            promptText.textContent = prompts[selectedIndex];
+            promptText.style.animation = 'fadeIn 0.5s';
+        }
+
+        // Spin the wheel (button/center click)
+        function spinWheel() {
+            if (isSpinning || isDragging) return;
+            
+            isSpinning = true;
+            const wheel = document.getElementById('wheel');
+            const promptText = document.getElementById('prompt-text');
+            
+            // Random number of rotations (3-5 full spins) plus random final position
+            const spins = 3 + Math.random() * 2;
+            const finalAngle = Math.random() * 360;
+            const totalRotation = currentRotation + spins * 360 + finalAngle;
+            
+            // Apply rotation with transition
+            wheel.style.transition = 'transform 4s cubic-bezier(0.25, 0.1, 0.25, 1)';
+            wheel.style.transform = `rotate(${totalRotation}deg)`;
+            currentRotation = totalRotation;
+            
+            // Calculate which prompt we landed on
+            const segmentAngle = 360 / prompts.length;
+            const normalizedAngle = (360 - (finalAngle % 360)) % 360;
+            const selectedIndex = Math.floor(normalizedAngle / segmentAngle);
+            
+            // Show the prompt after spinning
+            setTimeout(() => {
+                promptText.textContent = prompts[selectedIndex];
+                promptText.style.animation = 'fadeIn 0.5s';
+                isSpinning = false;
+                wheel.style.transition = 'none';
+            }, 4000);
+        }
+
+        // Tab switching
+        function switchTab(tab) {
+            const wheelTab = document.getElementById('wheel-tab');
+            const galleryTab = document.getElementById('gallery-tab');
+            const buttons = document.querySelectorAll('.tab-button');
+            
+            if (tab === 'wheel') {
+                wheelTab.classList.add('active');
+                galleryTab.classList.remove('active');
+                buttons[0].classList.add('active');
+                buttons[1].classList.remove('active');
+            } else {
+                wheelTab.classList.remove('active');
+                galleryTab.classList.add('active');
+                buttons[0].classList.remove('active');
+                buttons[1].classList.add('active');
+            }
+        }
+
+        // Initialize gallery
+        function initializeGallery() {
+            const imageGrid = document.querySelector('.image-grid');
+            
+            galleryImages.forEach((src, index) => {
+                const gridItem = document.createElement('div');
+                gridItem.className = 'grid-item';
+                gridItem.onclick = () => openLightbox(index);
+                
+                const img = document.createElement('img');
+                img.src = src;
+                img.alt = `Watercolor inspiration ${index + 1}`;
+                img.loading = 'lazy';
+                
+                gridItem.appendChild(img);
+                imageGrid.appendChild(gridItem);
+            });
+        }
+
+        // Lightbox functions
+        function openLightbox(index) {
+            currentLightboxIndex = index;
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            
+            lightbox.style.display = 'block';
+            lightboxImg.src = galleryImages[index];
+            
+            // Prevent body scroll when lightbox is open
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        function navigateLightbox(direction) {
+            currentLightboxIndex += direction;
+            
+            if (currentLightboxIndex < 0) {
+                currentLightboxIndex = galleryImages.length - 1;
+            } else if (currentLightboxIndex >= galleryImages.length) {
+                currentLightboxIndex = 0;
+            }
+            
+            document.getElementById('lightbox-img').src = galleryImages[currentLightboxIndex];
+        }
+
+        // Handle keyboard navigation in lightbox
+        document.addEventListener('keydown', (e) => {
+            const lightbox = document.getElementById('lightbox');
+            if (lightbox.style.display === 'block') {
+                if (e.key === 'ArrowLeft') navigateLightbox(-1);
+                if (e.key === 'ArrowRight') navigateLightbox(1);
+                if (e.key === 'Escape') closeLightbox();
+            }
+        });
+
+        // Touch support for lightbox on mobile
+        let lightboxTouchStartX = 0;
+        let lightboxTouchEndX = 0;
+
+        document.getElementById('lightbox').addEventListener('touchstart', e => {
+            lightboxTouchStartX = e.changedTouches[0].screenX;
+        });
+
+        document.getElementById('lightbox').addEventListener('touchend', e => {
+            lightboxTouchEndX = e.changedTouches[0].screenX;
+            handleLightboxSwipe();
+        });
+
+        function handleLightboxSwipe() {
+            if (lightboxTouchEndX < lightboxTouchStartX - 50) navigateLightbox(1);
+            if (lightboxTouchEndX > lightboxTouchStartX + 50) navigateLightbox(-1);
+        }
+
+        // Touch support for mobile
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        document.addEventListener('touchstart', e => {
+            if (e.target.closest('.wheel-container')) return; // Don't interfere with wheel touch
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        document.addEventListener('touchend', e => {
+            if (e.target.closest('.wheel-container')) return; // Don't interfere with wheel touch
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            // Only handle swipes in gallery tab
+            const galleryTab = document.getElementById('gallery-tab');
+            if (!galleryTab.classList.contains('active')) return;
+        }
+
+        // Initialize everything
+        initializeWheel();
+        initializeGallery();
+
+        // Add fade-in animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fadeIn {
+                from { opacity: 0; transform: scale(0.9); }
+                to { opacity: 1; transform: scale(1); }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
